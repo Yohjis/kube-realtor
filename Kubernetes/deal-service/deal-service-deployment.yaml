@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deal-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deal-service
+  template:
+    metadata:
+      labels:
+        app: deal-service
+    spec:
+      containers:
+      - image: kube-realtor_deal-service
+        name: deal-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8082
+

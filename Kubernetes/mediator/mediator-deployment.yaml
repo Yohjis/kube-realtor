@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mediator
+  template:
+    metadata:
+      labels:
+        app: mediator
+    spec:
+      containers:
+      - image: kube-realtor_mediator
+        imagePullPolicy: IfNotPresent
+        name: mediator
+        ports:
+        - containerPort: 8080

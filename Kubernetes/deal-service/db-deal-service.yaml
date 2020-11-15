@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-deal
+spec:
+  type: ClusterIP
+  ports:
+  - name: "db-deal"
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: db-deal
+

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: estate-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: estate-service
+  template:
+    metadata:
+      labels:
+        app: estate-service
+    spec:
+      containers:
+      - image: kube-realtor_estate-service
+        name: estate-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8083
+

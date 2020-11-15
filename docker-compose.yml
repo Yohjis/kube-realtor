@@ -1,0 +1,78 @@
+version: "3.3"
+
+services:
+
+  db-client:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=client
+    ports:
+      - 5440
+      
+  db-deal:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres2
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=deal
+    ports:
+      - 5441
+      
+  db-estate:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres3
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=estate
+    ports:
+      - 5442
+      
+  db-realtor:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres4
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=realtor
+    ports:
+      - 5443
+      
+
+  client-service:
+    build: clientService/
+    ports:
+      - "8081:8081"
+    depends_on: 
+      - db-client
+
+  deal-service:
+    build: dealService/
+    ports:
+      - "8082:8082"
+    depends_on: 
+      - db-deal
+
+  estate-service:
+    build: estateService/
+    ports:
+      - "8083:8083"
+    depends_on: 
+      - db-estate
+      
+  realtor-service:
+    build: realtorService/
+    ports:
+      - "8084:8084"
+    depends_on: 
+      - db-realtor
+
+  mediator:
+    build: Mediator/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - client-service
+      - deal-service
+      - estate-service
+      - realtor-service

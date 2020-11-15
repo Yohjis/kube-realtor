@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-client
+spec:
+  type: ClusterIP
+  ports:
+  - name: "db-client"
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: db-client
+

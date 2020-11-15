@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-realtor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-realtor
+  template:
+    metadata:
+      labels:
+        app: db-realtor
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: realtor
+        - name: POSTGRES_PASSWORD
+          value: "1"
+        - name: POSTGRES_USER
+          value: postgres3
+        image: postgres
+        imagePullPolicy: IfNotPresent
+        name: db-realtor
+        ports:
+        - containerPort: 5432
+

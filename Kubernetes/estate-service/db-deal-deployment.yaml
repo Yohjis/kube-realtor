@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-estate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-deal
+  template:
+    metadata:
+      labels:
+        app: db-deal
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: cashregister
+        - name: POSTGRES_PASSWORD
+          value: "1"
+        - name: POSTGRES_USER
+          value: postgres2
+        image: postgres
+        imagePullPolicy: IfNotPresent
+        name: db-estate
+        ports:
+        - containerPort: 5432

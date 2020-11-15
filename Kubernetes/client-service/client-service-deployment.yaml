@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-service
+  template:
+    metadata:
+      labels:
+        app: client-service
+    spec:
+      containers:
+      - image: kube-realtor_client-service
+        name: client-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+

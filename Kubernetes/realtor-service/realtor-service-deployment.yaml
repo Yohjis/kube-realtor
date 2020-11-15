@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: realtor-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: realtor-service
+  template:
+    metadata:
+      labels:
+        app: realtor-service
+    spec:
+      containers:
+      - image: kube-realtor_realtor-service
+        imagePullPolicy: IfNotPresent
+        name: realtor-service
+        ports:
+        - containerPort: 8084
+
